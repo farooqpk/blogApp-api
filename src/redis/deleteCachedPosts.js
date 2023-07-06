@@ -1,6 +1,6 @@
 const { redisClient } = require("../index.js");
 
-module.exports.deleteCachedPosts = async (posts) => {
+module.exports.deleteCachedPosts = async () => {
    try {
     await redisClient.del("posts")
     return

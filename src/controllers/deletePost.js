@@ -18,7 +18,7 @@ module.exports.deletePost = async (req, res) => {
       });
     }
     //delete cached posts
-await deleteCachedPosts()
+    await deleteCachedPosts();
     res.json({
       success: true,
       message: "Post deleted successfully",

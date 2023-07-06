@@ -11,8 +11,11 @@ module.exports.createPost = async (req, res) => {
         "INSERT INTO posts (title, content, author) VALUES ($1, $2, $3) RETURNING *";
       const values = [title, content, author];
       const result = await pool.query(query, values);
-      //add to the redis
-     await cachePosts(result.rows[0])
+
+      const queryAll = "SELECT * FROM posts";
+      const resultAll = await pool.query(queryAll);
+      //add to redis
+      await cachePosts(resultAll.rows);
       res.status(201).json(result.rows[0]);
       
     } else {

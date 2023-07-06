@@ -22,7 +22,9 @@ module.exports.updatePost = async (req, res) => {
         });
       }
      
-     await cachePosts(result.rows[0])
+      const queryAll = "SELECT * FROM posts";
+      const resultAll = await pool.query(queryAll);
+      await cachePosts(resultAll.rows);
      
       // Send the updated post as the response
       res.json(result.rows[0]);
